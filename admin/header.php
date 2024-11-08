@@ -99,14 +99,10 @@
                         </a>
                     </li>
                     <li>
-                        <a href="exam_category.php"> <i class="nav-item menu-icon fa fa-dashboard"></i>Add & Edit Exam
+                        <a href="exam_category.php"> <i class="nav-item menu-icon fa fa-dashboard"></i>Exams
                         </a>
                     </li>
-                    <li>
-                        <a href="add_edit_exam_questions.php"> <i class="nav-item menu-icon fa fa-dashboard"></i>Add &
-                            Edit
-                            Questions </a>
-                    </li>
+
                     <li>
                         <a href="exam_category.php"> <i class="nav-item menu-icon fa fa-dashboard"></i>Supplements
                         </a>

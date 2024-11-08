@@ -102,6 +102,10 @@ if (isset($_POST["submit1"])) {
 }
 ?>
 
+<?php
+include "add_exam_questions(exam).php"
+?>
+
 <?php 
 include "footer.php";
 ?>

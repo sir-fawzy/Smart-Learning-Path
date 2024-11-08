@@ -2,3 +2,8 @@ Fix bug: displaying uploaded images.
 FIx bug: editing images 
 Add: back to login page button in the register page
 Fix bug: Timer is still counting when I come out of the exam
+
+
+Create quiz category file: copy exam category code
+Create quiz category Table: copy exam category Structure
+
