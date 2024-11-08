@@ -1,6 +1,11 @@
 <?php 
 include "header.php";
 include "../connection.php";
+if (!$link) {
+    die("Connection failed: " . mysqli_connect_error());
+} else {
+    echo "Connected successfully";
+}
 ?>
 
         <div class="breadcrumbs">
@@ -57,7 +62,7 @@ include "../connection.php";
 
                                     <?php 
                                     $count=0;
-                                    $res=mysqli_query($link,"select * from exam_category");
+                                    $res=mysqli_query($link,"SELECT * from exam_category");
                                     while( $row=mysqli_fetch_array($res) ) {
                                         $count++;
                                         ?>
@@ -85,7 +90,7 @@ include "../connection.php";
                                 
 <?php
 if (isset($_POST["submit1"])) {
-    mysqli_query($link,"insert into exam_category values(NULL,'$_POST[examname]','$_POST[examtime]')") or die(mysqli_error($link));
+    mysqli_query($link,"INSERT into exam_category values(NULL,'$_POST[examname]','$_POST[examtime]')") or die(mysqli_error($link));
     ?>
     <script type="text/javascript">
         alert("exam added successfully!");
