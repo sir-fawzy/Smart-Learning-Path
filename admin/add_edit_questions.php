@@ -208,7 +208,7 @@ if (isset($_POST["submit2"])) {
 
     $loop += 1;
     $fquestion = mysqli_real_escape_string($link, $_POST['fquestion']);
-    $fopt1 = "opt_images/" . basename($_FILES['fopt1']['name']);
+    $fopt1 = "./images/opt_images/" . basename($_FILES['fopt1']['name']);
     move_uploaded_file($_FILES['fopt1']['tmp_name'], $fopt1);
 
     $fopt2 = "./images/opt_images/" . basename($_FILES['fopt2']['name']);
