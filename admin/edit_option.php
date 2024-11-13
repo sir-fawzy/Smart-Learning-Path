@@ -15,7 +15,7 @@ $opt4 = "";
 $answer = "";
 
 // Fetch question details based on the 'id'
-$res = mysqli_query($link, "SELECT * FROM questions WHERE id='$id'"); // Changed to use $id in the query for specific record
+$res = mysqli_query($link, "SELECT * FROM questions WHERE id=' $id'"); // Changed to use $id in the query for specific record
 if ($res && mysqli_num_rows($res) > 0) { // Added check to ensure the query was successful and returned rows
     $row = mysqli_fetch_array($res); // Fixed typo in while loop; used '=' for assignment instead of '-'
     $question = $row["question"];

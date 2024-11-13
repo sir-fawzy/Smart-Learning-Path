@@ -151,15 +151,20 @@ while ($row = mysqli_fetch_array($res)) {
                                 echo "<td>";
                                 if (strpos($row["opt4"], "./images/opt_images/") !== false) {
                                     ?>
-                                    <a href='edit_option_images.php?id=" . $row["id"] . "&id1=" . $id . "'>Edit</a>
+                                    <a
+                                        href='edit_option_images.php?id="<?php echo $row["id"]; ?> &id1=<?php echo $id; ?>'>Edit</a>
                                     <?php
                                 } else {
                                     ?>
-                                    <a href='edit_option.php?id=" . $row["id"] . "&id1=" . $id . "'>Edit</a>
+                                    <a href='edit_option.php?id=<?php echo $row["id"]; ?>&id1=<?php echo $id; ?>'>Edit</a>
                                     <?php
                                 }
                                 echo "</td>";
-                                echo "<td><a href='delete_option.php?id=" . $row["id"] . "&id1=" . $id . "'>Delete</a></td>";
+                                echo "<td>";
+                                ?><a
+                                    href='delete_option.php?id=<?php echo $row["id"]; ?>&id1=<?php echo $id; ?>'>Delete</a>
+                                <?php
+                                echo "</td>";
                                 echo "</tr>";
                             }
                             ?>
@@ -191,7 +196,7 @@ if (isset($_POST["submit1"])) {
     $answer = mysqli_real_escape_string($link, $_POST['answer']);
 
     mysqli_query($link, "INSERT INTO questions VALUES (NULL, '$loop', '$question', '$opt1', '$opt2', '$opt3', '$opt4', '$answer', '$exam_category')");
-    echo "<script type='text/javascript'>alert('Question added successfully'); window.location.href=window.location.href;</script>";
+    echo "<script type='text/javascript'> window.location.href=window.location.href;</script>";
 }
 ?>
 
