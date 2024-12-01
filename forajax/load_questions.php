@@ -18,7 +18,7 @@ if (isset($_SESSION["answer"][$queno])) {
     $ans = $_SESSION["answer"][$queno];
 }
 
-$res = mysqli_query($link, "SELECT * from questions where category='$_SESSION[exam_category]' && question_no=$_GET[questionno]");
+$res = mysqli_query($link, "SELECT * from questions where category='$_SESSION[exam_category]' AND question_no=$_GET[questionno]");
 $count = mysqli_num_rows($res);
 
 if ($count == 0) {

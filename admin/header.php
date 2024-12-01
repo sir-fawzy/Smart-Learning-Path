@@ -71,7 +71,7 @@
                     aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="./">CMS</a>
+                <a class="navbar-brand" href="./">Smart Learning Path</a>
                 <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
             </div>
 
@@ -83,6 +83,7 @@
                     <hr>
                     <li>
                         <a href="exam_category.php"> <i class="nav-item menu-icon fa fa-dashboard"></i>Lectures
+                            Materials
                         </a>
                     </li>
                     <hr>

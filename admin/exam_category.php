@@ -3,9 +3,7 @@ include "header.php";
 include "../connection.php";
 if (!$link) {
     die("Connection failed: " . mysqli_connect_error());
-} else {
-    echo "Connected successfully";
-}
+} 
 ?>
 
         <div class="breadcrumbs">

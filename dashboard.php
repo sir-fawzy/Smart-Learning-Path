@@ -63,15 +63,17 @@ include "header.php";
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-
-                if (xmlhttp.responseText == "over") {
+                var cleanedResponse = xmlhttp.responseText.replace(/<!--.*?-->/g, '').trim();
+                    console.log("Cleaned response: " + cleanedResponse); // Debugging statement 
+                if (cleanedResponse == "over") {
+                    console.log("Redirecting to result.php"); // Debugging statement
                     window.location = "result.php";
                 }
                 else {
                     document.getElementById("load-questions").innerHTML = xmlhttp.responseText;
-                    load_total_que(null);
                 }
             }
+            load_total_que(null);
         };
         xmlhttp.open("GET", "forajax/load_questions.php?questionno=" + questionno, true);
         xmlhttp.send(null);
