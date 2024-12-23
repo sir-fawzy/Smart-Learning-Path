@@ -3,3 +3,5 @@ npm-debug.log
 node_modules
 .sass-cache
 Docker/
+./Proposed_updates.txt
+./Bugs_to_fix.txt

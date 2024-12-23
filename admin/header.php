@@ -83,7 +83,6 @@
                     <hr>
                     <li>
                         <a href="exam_category.php"> <i class="nav-item menu-icon fa fa-dashboard"></i>Lectures
-                            Materials
                         </a>
                     </li>
                     <hr>

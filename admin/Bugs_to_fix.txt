@@ -1,0 +1,9 @@
+Fix bug: displaying uploaded images.
+FIx bug: editing images 
+
+Fix bug: Timer is still counting when I come out of the exam
+
+
+
+
+

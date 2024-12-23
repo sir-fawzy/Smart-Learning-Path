@@ -1,0 +1,10 @@
+Add grading option for exams and etc.
+Back button in add_edit_questions.php page
+Back to login page button in the register page
+
+Create quiz category file: copy exam category code
+Create quiz category Table: copy exam category Structure
+
+
+Students' ability to see questions they got right and what they got wrong.
+
