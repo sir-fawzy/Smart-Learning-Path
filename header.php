@@ -39,7 +39,7 @@
                                             <ul class="nav navbar-nav mai-top-nav">
                                                 <li class="nav-item"><a href="#" class="nav-link">Select Assignment</a>
                                                 </li>
-                                                <li class="nav-item"><a href="#" class="nav-link">Last Results</a>
+                                                <li class="nav-item"><a href="old_exam_results.php" class="nav-link">Last Results</a>
                                                 </li>
                                                 <li class="nav-item"><a href="#" class="nav-link">Logout</a>
                                                 </li>

@@ -110,6 +110,10 @@
                     <li>
                         <a href="index.html"> <i class="nav-item menu-icon fa fa-close"></i>Logout </a>
                     </li>
+                    <li>
+                        <a href="old_exam_results.php"> <i class="nav-item menu-icon fa fa-dashboard"></i>All Exam results
+                        </a>
+                    </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
