@@ -4,14 +4,11 @@ include "connection.php";
 include "header.php";
 $date = date("Y-m-d H:i:s");
 $_SESSION["end_time"] = date("Y-m-d H:i:s", strtotime($date . "+ $_SESSION[exam_time] minutes"));
-
-
 ?>
 
 <div class="row" style="margin: 0px; padding:0px; margin-bottom: 50px;">
     <!-- content area -->
     <div class="col-lg-6 col-lg-push-3" style="min-height: 500px; background-color: white;">
-
         <?php
         $correct = 0;
         $wrong = 0;
@@ -45,16 +42,14 @@ $_SESSION["end_time"] = date("Y-m-d H:i:s", strtotime($date . "+ $_SESSION[exam_
         echo "Wrong Answer=" . $wrong;
         echo "</center>";
         ?>
-
     </div>
-
 </div>
 
 <?php
 if (isset($_SESSION["exam_start"])) {
     $date = date("Y-m-d");
-    mysqli_query($link, "INSERT into exam_results(id, username, exam_type, total_question, correct_answer, wrong_answer, exam_time) values(NULL,'$_SESSION[username]','$_SESSION[exam_category]','$count','$correct','$wrong','$date')");
-    unset($_SESSION["exam_start"]); // Move this line inside the if block
+    mysqli_query($link, "INSERT INTO exam_results(id, username, exam_type, total_question, correct_answer, wrong_answer,exam_time) values(NULL,'$_SESSION[username]','$_SESSION[exam_category]','$count','$correct','$wrong','$date')");
+    unset($_SESSION["exam_start"]);
     ?>
     <script type="text/javascript">
         window.location.href = window.location.href;

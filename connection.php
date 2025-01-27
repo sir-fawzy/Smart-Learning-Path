@@ -1,8 +1,3 @@
-<!-- <?php
-$link = mysqli_connect("localhost", "root", "mpkq88@2022");
-mysqli_select_db($link, "online_quiz");
-?>  -->
-
 <?php
 $link = mysqli_connect("localhost", "root", "mpkq88@2022", "online_quiz");
 
