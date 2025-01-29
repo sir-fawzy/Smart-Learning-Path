@@ -40,18 +40,34 @@
 
         }
 
+        #left-panel.left-panel {
+            position: fixed;
+            height: 100vh;
+            width: 250px;
+            top: 0;
+            left: 0;
+        }
+
+        body {
+            padding-left: 250px;
+        }
+
+        #header.header {
+            margin-left: -250px;
+            width: calc(100% + 250px);
+        }
+
+       
         .nav-item {
             color: white;
             margin: 10px 0;
-            /* Space between items */
             display: flex;
             align-items: center;
-            /* Vertically center icon and text */
+           
         }
 
         .nav-item:hover {
             background-color: #374151;
-            /* Darker background on hover */
             border-radius: 5px;
             cursor: pointer;
             padding: 5px;
@@ -127,7 +143,7 @@
         <header id="header" class="header">
             <div class="header-menu">
                 <div class="col-sm-7">
-                    <!-- Other content can go here -->
+                    <!-- Other content  -->
                 </div>
 
                 <div class="col-sm-5">

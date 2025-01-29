@@ -43,7 +43,7 @@ include "../connection.php";
                                         <td><?php echo ucfirst($row["assessment_category"]); ?></td>
                                         <td><?php echo $row["due_date"] ? $row["due_date"] : "Not Set"; ?></td>
                                         <td><?php echo $row["time_limit"] ? $row["time_limit"] . " minutes" : "Not Set"; ?></td>
-                                        <td><a href="add_edit_assessment_questions.php?id=<?php echo $row["id"]; ?>">Select</a></td>
+                                        <td><a href="add_edit_questions.php?id=<?php echo $row["id"]; ?>">Select</a></td>
                                     </tr>
                                     <?php
                                 }
