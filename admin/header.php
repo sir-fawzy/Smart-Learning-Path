@@ -78,7 +78,7 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="./index.html"> <i class='bx bxs-dashboard' style="margin: 6%"></i></i>Dashboard </a>
+                        <a href="dashboard.php"> <i class='bx bxs-dashboard' style="margin: 6%"></i></i>Dashboard </a>
                     </li>
                     <hr>
                     <li>

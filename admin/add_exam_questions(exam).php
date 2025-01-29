@@ -1,5 +1,4 @@
 <?php
-
 include "../connection.php";
 ?>
 
@@ -7,7 +6,7 @@ include "../connection.php";
     <div class="col-sm-4">
         <div class="page-header float-left">
             <div class="page-title">
-                <h1>Add Questions</h1>
+                <h1>Add Assessment Questions</h1>
             </div>
         </div>
     </div>
@@ -23,16 +22,16 @@ include "../connection.php";
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Exam Name</th>
-                                    <th scope="col">Exam Time (minutes)</th>
+                                    <th scope="col">Assessment Name</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Due Date</th>
+                                    <th scope="col">Time Limit</th>
                                     <th scope="col">Select</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-
                                 $count = 0;
-
                                 $res = mysqli_query($link, "SELECT * FROM exam_category");
 
                                 while ($row = mysqli_fetch_array($res)) {
@@ -41,8 +40,10 @@ include "../connection.php";
                                     <tr>
                                         <th scope="row"><?php echo $count; ?></th>
                                         <td><?php echo $row["category"]; ?></td>
-                                        <td><?php echo $row["exam_time_in_minutes"]; ?></td>
-                                        <td><a href="add_edit_questions.php?id=<?php echo $row["id"]; ?>">Select</a></td>
+                                        <td><?php echo ucfirst($row["assessment_category"]); ?></td>
+                                        <td><?php echo $row["due_date"] ? $row["due_date"] : "Not Set"; ?></td>
+                                        <td><?php echo $row["time_limit"] ? $row["time_limit"] . " minutes" : "Not Set"; ?></td>
+                                        <td><a href="add_edit_assessment_questions.php?id=<?php echo $row["id"]; ?>">Select</a></td>
                                     </tr>
                                     <?php
                                 }
