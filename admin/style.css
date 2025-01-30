@@ -1,0 +1,66 @@
+/* Ensures content fits within the screen on smaller devices */
+@media (max-width: 1200px) {
+    .col-lg-6 {
+        width: 100%;
+        /* Full width on medium devices */
+        margin-bottom: 20px;
+    }
+}
+
+/* Stack the columns on smaller devices */
+@media (max-width: 768px) {
+    .col-12 {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+}
+
+/* Optional: Adjust table for smaller screens */
+@media (max-width: 576px) {
+    table {
+        font-size: 14px;
+        /* Slightly smaller text for mobile */
+    }
+
+    .form-control {
+        font-size: 14px;
+        /* Ensure inputs are still legible */
+    }
+}
+
+@media (max-width: 1200px) {
+    .col-lg-6 {
+        width: 100%;
+        /* Full width on medium devices */
+        margin-bottom: 20px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .col-12 {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+}
+
+/* Optional: Adjust table for smaller screens */
+@media (max-width: 576px) {
+    table {
+        font-size: 14px;
+        /* Slightly smaller text for mobile */
+    }
+
+    .form-control {
+        font-size: 14px;
+        /* Ensure inputs are still legible */
+    }
+}
