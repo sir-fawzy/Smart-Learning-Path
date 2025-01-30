@@ -33,7 +33,7 @@ if (!$link) {
 </div>
 
 <div class="container"
-    style="background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    style="background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); ">
     <h2 class="mb-4" style="color: #333; border-bottom: 2px solid grey; padding-bottom: 10px;">Lecture Materials</h2>
     <div class="row">
         <?php
@@ -46,7 +46,7 @@ if (!$link) {
 
             // Title container
             echo "<div class='title-container'>";
-            echo "<h3 class='card-title' style='background-color:grey; padding: 15px; margin: 0; color: white; font-size: 1.2rem; border-radius: 4px 4px 0 0;'>" . htmlspecialchars($row['title']) . "</h3>";
+            echo "<h3 class='card-title' style='background-color:#4C0013; padding: 15px; margin: 0; color: white; font-size: 1.2rem; border-radius: 4px 4px 0 0;'>" . htmlspecialchars($row['title']) . "</h3>";
             echo "</div>";
 
             // Content container

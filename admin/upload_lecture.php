@@ -4,27 +4,54 @@ include "../connection.php";
 include "header.php";
 ?>
 
-<div class="container">
-    <h2>Upload Lecture Materials</h2>
-    <form action="upload_lecture.php" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="lecture_title">Lecture Title:</label>
-            <input type="text" class="form-control" id="lecture_title" name="lecture_title" required>
+<head>
+    <style>
+        .back-btn {
+            color: #333;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: #666;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<!-- Add Back Button -->
+<div class="container mt-3">
+    <a href="lectures.php" class="back-btn">
+        <i class='bx bxs-left-arrow-square'></i> Back to Lectures Menu
+    </a>
+</div>
+<div class="container mt-5">
+    <div class="card shadow-sm" style="border-radius: 10px;">
+        <div class="card-body p-4">
+            <h2>Upload Lecture Materials</h2>
+            <form action="upload_lecture.php" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="lecture_title">Lecture Title:</label>
+                    <input type="text" class="form-control" id="lecture_title" name="lecture_title" required>
+                </div>
+                <div class="form-group">
+                    <label for="lecture_notes">Lecture Notes (Typed):</label>
+                    <textarea class="form-control" id="lecture_notes" name="lecture_notes" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="lecture_pdf">Lecture PDF/Document:</label>
+                    <input type="file" class="form-control" id="lecture_pdf" name="lecture_pdf">
+                </div>
+                <div class="form-group">
+                    <label for="lecture_video">Lecture Video:</label>
+                    <input type="file" class="form-control" id="lecture_video" name="lecture_video">
+                </div>
+                <button type="submit" class="btn btn-success" name="upload">Upload</button>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="lecture_notes">Lecture Notes (Typed):</label>
-            <textarea class="form-control" id="lecture_notes" name="lecture_notes" rows="5"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="lecture_pdf">Lecture PDF/Document:</label>
-            <input type="file" class="form-control" id="lecture_pdf" name="lecture_pdf">
-        </div>
-        <div class="form-group">
-            <label for="lecture_video">Lecture Video:</label>
-            <input type="file" class="form-control" id="lecture_video" name="lecture_video">
-        </div>
-        <button type="submit" class="btn btn-success" name="upload">Upload</button>
-    </form>
+    </div>
 </div>
 
 <?php
@@ -73,7 +100,7 @@ if (isset($_POST['upload'])) {
     }
 
     // Only insert into database if at least one file was uploaded successfully
-    if ($pdf_path !== "" || $video_path !== "") {
+    if ($pdf_path !== "" || $video_path !== "" || ($lecture_notes !== "" && $lecture_title !== "")) {
         $query = "INSERT INTO lectures (title, notes, pdf_path, video_path) VALUES ('$lecture_title', '$lecture_notes', '$pdf_path', '$video_path')";
         if (mysqli_query($link, $query)) {
             echo "<div class='alert alert-success'>Lecture materials uploaded successfully.</div>";
