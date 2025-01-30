@@ -37,7 +37,7 @@
                                     <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
                                         <div class="header-top-menu tabl-d-n">
                                             <ul class="nav navbar-nav mai-top-nav">
-                                                <li class="nav-item"><a href="view_lectures.php"
+                                                <li class="nav-item"><a href="view_lectures_student.php"
                                                         class="nav-link">Lectures</a>
                                                 </li>
                                                 <li class="nav-item"><a href="select_exam.php" class="nav-link">Select

@@ -23,33 +23,63 @@ include "header.php";
             <label for="lecture_video">Lecture Video:</label>
             <input type="file" class="form-control" id="lecture_video" name="lecture_video">
         </div>
-        <button type="submit" class="btn btn-primary" name="upload">Upload</button>
+        <button type="submit" class="btn btn-success" name="upload">Upload</button>
     </form>
 </div>
 
 <?php
 if (isset($_POST['upload'])) {
+    // Create uploads directory if it doesn't exist
+    $upload_dir = "../uploads/";
+    if (!file_exists($upload_dir)) {
+        mkdir($upload_dir, 0777, true);
+    }
+    chmod($upload_dir, 0777);
+
     $lecture_title = mysqli_real_escape_string($link, $_POST['lecture_title']);
     $lecture_notes = mysqli_real_escape_string($link, $_POST['lecture_notes']);
 
     $pdf_path = "";
     $video_path = "";
 
-    if ($_FILES['lecture_pdf']['name'] != "") {
-        $pdf_path = "uploads/" . basename($_FILES['lecture_pdf']['name']);
-        move_uploaded_file($_FILES['lecture_pdf']['tmp_name'], $pdf_path);
+    // Handle PDF upload
+    if (!empty($_FILES['lecture_pdf']['name'])) {
+        $pdf_file = $_FILES['lecture_pdf'];
+        $pdf_name = time() . '_' . basename($pdf_file['name']);
+        $pdf_path = $upload_dir . $pdf_name;
+
+        if ($pdf_file['error'] === 0) {
+            if (move_uploaded_file($pdf_file['tmp_name'], $pdf_path)) {
+                $pdf_path = "uploads/" . $pdf_name; // Store relative path in database
+            } else {
+                echo "<div class='alert alert-danger'>Error uploading PDF: " . error_get_last()['message'] . "</div>";
+            }
+        }
     }
 
-    if ($_FILES['lecture_video']['name'] != "") {
-        $video_path = "uploads/" . basename($_FILES['lecture_video']['name']);
-        move_uploaded_file($_FILES['lecture_video']['tmp_name'], $video_path);
+    // Handle Video upload
+    if (!empty($_FILES['lecture_video']['name'])) {
+        $video_file = $_FILES['lecture_video'];
+        $video_name = time() . '_' . basename($video_file['name']);
+        $video_path = $upload_dir . $video_name;
+
+        if ($video_file['error'] === 0) {
+            if (move_uploaded_file($video_file['tmp_name'], $video_path)) {
+                $video_path = "uploads/" . $video_name; // Store relative path in database
+            } else {
+                echo "<div class='alert alert-danger'>Error uploading video: " . error_get_last()['message'] . "</div>";
+            }
+        }
     }
 
-    $query = "INSERT INTO lectures (title, notes, pdf_path, video_path) VALUES ('$lecture_title', '$lecture_notes', '$pdf_path', '$video_path')";
-    if (mysqli_query($link, $query)) {
-        echo "<div class='alert alert-success'>Lecture materials uploaded successfully.</div>";
-    } else {
-        echo "<div class='alert alert-danger'>Error: " . mysqli_error($link) . "</div>";
+    // Only insert into database if at least one file was uploaded successfully
+    if ($pdf_path !== "" || $video_path !== "") {
+        $query = "INSERT INTO lectures (title, notes, pdf_path, video_path) VALUES ('$lecture_title', '$lecture_notes', '$pdf_path', '$video_path')";
+        if (mysqli_query($link, $query)) {
+            echo "<div class='alert alert-success'>Lecture materials uploaded successfully.</div>";
+        } else {
+            echo "<div class='alert alert-danger'>Database Error: " . mysqli_error($link) . "</div>";
+        }
     }
 }
 ?>

@@ -21,6 +21,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="assets/css/style.css">
 
+
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <style>
@@ -37,6 +38,7 @@
             justify-content: space-between;
 
             padding: 10px;
+
 
         }
 
@@ -63,7 +65,7 @@
 <body>
     <!-- Left Panel -->
 
-    <aside id="left-panel" class=" left-panel" style="background-color: #4C0013">
+    <aside id="left-panel" class=" left-panel" style="background-color: #4C0013;">
         <nav class=" navbar navbar-expand-sm navbar-default" style="height: 100%; background-color: #4C0013;">
 
             <div class="navbar-header">
@@ -82,34 +84,24 @@
                     </li>
                     <hr>
                     <li>
-                        <a href="upload_lecture.php"> <i class='bx bxs-book' style="margin: 6%"></i>Lectures
+                        <a href="lectures.php"> <i class='bx bxs-book' style="margin: 6%"></i>Lectures
                         </a>
                     </li>
                     <hr>
+
                     <li>
-                        <a href="exam_category.php"> <i class='bx bxs-edit-alt' style="margin: 6%"></i>Homework
-                        </a>
-                    </li>
-                    <li>
-                        <a href="exam_category.php"> <i class='bx bxs-book-open' style="margin: 6%"></i>Excerises
-                        </a>
-                    </li>
-                    <li>
-                        <a href="exam_category.php"> <i class='bx bxs-bulb' style="margin: 6%"></i>Quizzes
-                        </a>
-                    </li>
-                    <li>
-                        <a href="exam_category.php"> <i class='bx bx-question-mark' style="margin: 6%"></i>Exams
+                        <a href="exam_category.php"> <i class='bx bxs-book-open' style="margin: 6%"></i> Add Assessments
                         </a>
                     </li>
 
                     <li>
-                        <a href="old_exam_results.php"> <i class="nav-item menu-icon fa fa-dashboard"></i>All Exam
+                        <a href="old_exam_results.php"> <i class='bx bxs-objects-vertical-bottom'
+                                style="margin: 6%"></i>All Exam
                             results
                         </a>
                     </li>
                     <li>
-                        <a href="index.html"> <i class="nav-item menu-icon fa fa-close"></i>Logout </a>
+                        <a href="index.html"> <i class='bx bxs-x-square' style="margin: 6%"></i>Logout </a>
                     </li>
 
                 </ul>

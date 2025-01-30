@@ -1,9 +1,13 @@
 <?php
+
 session_start();
-include "connection.php";
+include "./connection.php";
 include "header.php";
 $date = date("Y-m-d H:i:s");
 $_SESSION["end_time"] = date("Y-m-d H:i:s", strtotime($date . "+ $_SESSION[exam_time] minutes"));
+if (!$link) {
+    die("Connection failed: " . mysqli_connect_error());
+}
 ?>
 
 <div class="row" style="margin: 0px; padding:0px; margin-bottom: 50px;">
@@ -47,14 +51,25 @@ $_SESSION["end_time"] = date("Y-m-d H:i:s", strtotime($date . "+ $_SESSION[exam_
 
 <?php
 if (isset($_SESSION["exam_start"])) {
-    $date = date("Y-m-d");
-    mysqli_query($link, "INSERT INTO exam_results(id, username, exam_type, total_question, correct_answer, wrong_answer,exam_time) values(NULL,'$_SESSION[username]','$_SESSION[exam_category]','$count','$correct','$wrong','$date')");
+
+    if (!isset($_SESSION["username"]) || !isset($_SESSION["exam_category"])) {
+        die("Error: Required session variables not set");
+    }
+
+    $date = date("Y-m-d H:i:s"); // Change to include time
+    $username = mysqli_real_escape_string($link, $_SESSION['username']);
+    $exam_type = mysqli_real_escape_string($link, $_SESSION['exam_category']);
+
+    $query = "INSERT INTO exam_results(username, exam_type, total_question, correct_answer, wrong_answer, exam_time) 
+              VALUES ('$username', '$exam_type', $count, $correct, $wrong, '$date')";
+
+    if (!mysqli_query($link, $query)) {
+        echo "Error: " . mysqli_error($link);
+    }
+
     unset($_SESSION["exam_start"]);
-    ?>
-    <script type="text/javascript">
-        window.location.href = window.location.href;
-    </script>
-    <?php
+
+
 }
 ?>
 
