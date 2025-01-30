@@ -17,7 +17,6 @@ if (!$link) {
     </div>
 </div>
 
-<!-- Add Assessment Form Section -->
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
@@ -64,7 +63,6 @@ if (!$link) {
     </div> <!-- .animated fadeIn -->
 </div> <!-- .content -->
 
-<!-- Assessment Categories Table Section -->
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
