@@ -20,6 +20,8 @@ if (isset($_POST['delete']) && isset($_POST['lecture_id'])) {
 
     // Delete database record
     $delete_query = "DELETE FROM lectures WHERE id = '$lecture_id'";
+    mysqli_query($link, $delete_query);
+
     if (mysqli_query($link, $delete_query)) {
         $_SESSION['message'] = "Lecture deleted successfully";
     } else {

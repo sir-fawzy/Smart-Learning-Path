@@ -64,7 +64,7 @@ if (!$link) {
             }
             echo "<form action='delete_lecture.php' method='POST' onsubmit='return confirm(\"Are you sure you want to delete this lecture?\")'>";
             echo "<input type='hidden' name='lecture_id' value='" . $row['id'] . "'>";
-            echo "<button type='submit' class='btn btn-danger btn-block' style='background-color: #dc3545; border: none;'>Delete Lecture</button>";
+            echo "<button type='submit' name= 'delete' class='btn btn-danger btn-block' style='background-color: #dc3545; border: none;'>Delete Lecture</button>";
             echo "</form>";
             echo "</div>";
             echo "</div>";

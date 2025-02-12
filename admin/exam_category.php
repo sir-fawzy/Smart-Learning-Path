@@ -1,10 +1,10 @@
-<?php 
-include "header.php"; 
+<?php
+include "header.php";
 include "../connection.php";
 
 if (!$link) {
     die("Connection failed: " . mysqli_connect_error());
-} 
+}
 ?>
 
 <div class="breadcrumbs">
@@ -28,11 +28,13 @@ if (!$link) {
                             <div class="card-body card-block">
                                 <div class="form-group">
                                     <label for="assessment_name" class="form-control-label">New Assessment Name</label>
-                                    <input type="text" name="assessmentname" placeholder="Add Assessment Name" class="form-control">
+                                    <input type="text" name="assessmentname" placeholder="Add Assessment Name"
+                                        class="form-control">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="assessment_category" class="form-control-label">Assessment Category</label>
+                                    <label for="assessment_category" class="form-control-label">Assessment
+                                        Category</label>
                                     <select name="assessment_category" class="form-control">
                                         <option value="homework">Homework</option>
                                         <option value="quiz">Quiz</option>
@@ -48,7 +50,8 @@ if (!$link) {
 
                                 <div class="form-group">
                                     <label for="time_limit" class="form-control-label">Time Limit (Optional)</label>
-                                    <input type="text" name="time_limit" placeholder="Time Limit (minutes)" class="form-control">
+                                    <input type="text" name="time_limit" placeholder="Time Limit (minutes)"
+                                        class="form-control">
                                 </div>
 
                                 <div class="form-group">
@@ -85,7 +88,7 @@ if (!$link) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
+                                <?php
                                 $count = 0;
                                 $res = mysqli_query($link, "SELECT * FROM exam_category");
                                 while ($row = mysqli_fetch_array($res)) {
@@ -96,7 +99,8 @@ if (!$link) {
                                         <td><?php echo $row["category"]; ?></td>
                                         <td><?php echo ucfirst($row["assessment_category"]); ?></td>
                                         <td><?php echo $row["due_date"] ? $row["due_date"] : "Not Set"; ?></td>
-                                        <td><?php echo $row["time_limit"] ? $row["time_limit"] . " minutes" : "Not Set"; ?></td>
+                                        <td><?php echo $row["time_limit"] ? $row["time_limit"] . " minutes" : "Not Set"; ?>
+                                        </td>
                                         <td><a href="edit_exam.php?id=<?php echo $row["id"]; ?>">Edit</a></td>
                                         <td><a href="delete.php?id=<?php echo $row["id"]; ?>">Delete</a></td>
                                     </tr>
@@ -116,12 +120,23 @@ if (!$link) {
 if (isset($_POST["submit1"])) {
     $assessment_name = $_POST['assessmentname'];
     $assessment_category = $_POST['assessment_category'];
-    $due_date = $_POST['due_date'];
-    $time_limit = $_POST['time_limit'];
+
+    if (!empty($_POST['due_date'])) {
+        $due_date = $_POST['due_date']; // or "'" . mysqli_rea_escape_string($link, $_POST['due_date']) . "'";
+    } else {
+        $due_date = NULL;
+    }
+
+    if (!empty($_POST['time_limit'])) {
+        $time_limit = $_POST['time_limit'];
+    } else {
+        $time_limit = NULL;
+    }
+
 
     mysqli_query($link, "INSERT INTO exam_category (category, assessment_category, due_date, time_limit) 
-                         VALUES ('$assessment_name', '$assessment_category', '$due_date', '$time_limit')") 
-    or die(mysqli_error($link));
+                         VALUES ('$assessment_name', '$assessment_category', '$due_date', '$time_limit')")
+        or die(mysqli_error($link));
 
     ?>
     <script type="text/javascript">

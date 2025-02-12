@@ -1,0 +1,13 @@
+execute this command to drop the exam_results table:
+DROP TABLE exam_results;
+
+Then execute this to create a new one:
+CREATE TABLE exam_results (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255),
+    exam_type VARCHAR(255),
+    total_question INT,
+    correct_answer INT,
+    wrong_answer INT,
+    exam_time DATETIME
+);

@@ -6,7 +6,7 @@ include "header.php";
 $date = date("Y-m-d H:i:s");
 $_SESSION["end_time"] = date("Y-m-d H:i:s", strtotime($date . "+ $_SESSION[exam_time] minutes"));
 if (!$link) {
-    die("Connection failed: " . mysqli_connect_error());
+    echo die("Connection failed: " . mysqli_connect_error());
 }
 ?>
 
@@ -14,6 +14,7 @@ if (!$link) {
     <!-- content area -->
     <div class="col-lg-6 col-lg-push-3" style="min-height: 500px; background-color: white;">
         <?php
+
         $correct = 0;
         $wrong = 0;
 
@@ -51,6 +52,9 @@ if (!$link) {
 
 <?php
 if (isset($_SESSION["exam_start"])) {
+    $res = mysqli_query($link, "SELECT * from questions where category='$_SESSION[exam_category]'");
+    $count = mysqli_num_rows($res);
+    $wrong = $count - $correct;
 
     if (!isset($_SESSION["username"]) || !isset($_SESSION["exam_category"])) {
         die("Error: Required session variables not set");

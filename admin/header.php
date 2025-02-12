@@ -59,13 +59,13 @@
             width: calc(100% + 250px);
         }
 
-       
+
         .nav-item {
             color: white;
             margin: 10px 0;
             display: flex;
             align-items: center;
-           
+
         }
 
         .nav-item:hover {
@@ -89,7 +89,7 @@
                     aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="./">Smart Learning Path</a>
+                <a class="navbar-brand" href="./">Smart Learning System</a>
                 <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
             </div>
 
