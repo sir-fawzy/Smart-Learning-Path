@@ -1,28 +1,92 @@
-ALTER TABLE exam_category ADD COLUMN assessment_category ENUM('homework', 'quiz', 'exercise', 'test') DEFAULT 'quiz';
-ALTER TABLE exam_category ADD COLUMN due_date DATE NULL;
-ALTER TABLE exam_category ADD COLUMN time_limit INT NULL;
+1. Instructors Table
 
-
-#questions table changes
-
-CREATE TABLE IF NOT EXISTS `questions` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `question_no` INT(11) NOT NULL, -- Order of questions within the category
-  `question_type` ENUM('multiple_choice', 'image_choice', 'true_false', 'text_answer') NOT NULL,
-  `question` TEXT NOT NULL, -- The question text
-  `opt1` VARCHAR(255) DEFAULT NULL, -- Option 1 (for multiple_choice and image_choice)
-  `opt2` VARCHAR(255) DEFAULT NULL, -- Option 2 (for multiple_choice and image_choice)
-  `opt3` VARCHAR(255) DEFAULT NULL, -- Option 3 (for multiple_choice)
-  `opt4` VARCHAR(255) DEFAULT NULL, -- Option 4 (for multiple_choice)
-  `answer` VARCHAR(255) DEFAULT NULL, -- Correct answer (for multiple_choice and true_false)
-  `fopt1` VARCHAR(255) DEFAULT NULL, -- Image file path for option 1 (for image_choice)
-  `fopt2` VARCHAR(255) DEFAULT NULL, -- Image file path for option 2 (for image_choice)
-  `fopt3` VARCHAR(255) DEFAULT NULL, -- Image file path for option 3 (for image_choice)
-  `fopt4` VARCHAR(255) DEFAULT NULL, -- Image file path for option 4 (for image_choice)
-  `fanswer` VARCHAR(255) DEFAULT NULL, -- Image file path for correct answer (for image_choice)
-  `correct_text` TEXT DEFAULT NULL, -- Correct answer text (for text_answer)
-  `category` VARCHAR(255) NOT NULL, -- The exam category this question belongs to
-  PRIMARY KEY (`id`),
-  KEY `category_idx` (`category`),
-  KEY `question_no_idx` (`question_no`)
+CREATE TABLE online_quiz.instructors (
+  id INT(11) PRIMARY KEY AUTO_INCREMENT,
+  user_id INT(5),
+  first_name VARCHAR(50),
+  last_name VARCHAR(50),
+  email VARCHAR(100),
+  department VARCHAR(100),
+  hire_date DATE,
+  FOREIGN KEY (user_id) REFERENCES online_quiz.registration(id)
 );
+
+2. Classes Table
+
+CREATE TABLE online_quiz.classes (
+  id INT(11) PRIMARY KEY AUTO_INCREMENT,
+  class_code VARCHAR(20) UNIQUE,
+  class_name VARCHAR(100),
+  instructor_id INT(11),
+  description TEXT,
+  start_date DATE,
+  end_date DATE,
+  is_active TINYINT(1) DEFAULT 1,
+  FOREIGN KEY (instructor_id) REFERENCES online_quiz.instructors(id)
+);
+
+3. Class Enrollments Table
+
+CREATE TABLE online_quiz.class_enrollments (
+  id INT(11) PRIMARY KEY AUTO_INCREMENT,
+  class_id INT(11),
+  student_id INT(5),
+  enrollment_date DATE,
+  status ENUM('active', 'dropped', 'completed') DEFAULT 'active',
+  FOREIGN KEY (class_id) REFERENCES online_quiz.classes(id),
+  FOREIGN KEY (student_id) REFERENCES online_quiz.registration(id)
+);
+
+4. Class Materials Table
+
+CREATE TABLE online_quiz.class_materials (
+  id INT(11) PRIMARY KEY AUTO_INCREMENT,
+  class_id INT(11),
+  title VARCHAR(100),
+  description TEXT,
+  material_type ENUM('assignment', 'lecture', 'resource'),
+  content_id INT(11),
+  release_date DATETIME,
+  due_date DATETIME,
+  FOREIGN KEY (class_id) REFERENCES online_quiz.classes(id)
+);
+
+5. User Roles Table
+
+CREATE TABLE online_quiz.user_roles (
+  id INT(5) PRIMARY KEY AUTO_INCREMENT,
+  role_name VARCHAR(50)
+);
+
+INSERT INTO online_quiz.user_roles (role_name) VALUES 
+('admin'), ('instructor'), ('student');
+
+6. User Role Assignments
+
+CREATE TABLE online_quiz.user_role_assignments (
+  id INT(11) PRIMARY KEY AUTO_INCREMENT,
+  user_id INT(5),
+  role_id INT(5),
+  FOREIGN KEY (user_id) REFERENCES online_quiz.registration(id),
+  FOREIGN KEY (role_id) REFERENCES online_quiz.user_roles(id)
+);
+
+Changes to Existing Tables
+1. Modify Registration Table
+
+ALTER TABLE online_quiz.registration 
+ADD COLUMN active TINYINT(1) DEFAULT 1,
+ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN last_login DATETIME;
+
+2. Modify Exam Category Table
+
+ALTER TABLE online_quiz.exam_category
+ADD COLUMN class_id INT(11),
+ADD FOREIGN KEY (class_id) REFERENCES online_quiz.classes(id);
+
+3. Link Lectures to Classes
+
+ALTER TABLE online_quiz.lectures
+ADD COLUMN class_id INT(11),
+ADD FOREIGN KEY (class_id) REFERENCES online_quiz.classes(id);
