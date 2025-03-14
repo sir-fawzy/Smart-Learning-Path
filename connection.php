@@ -1,5 +1,5 @@
 <?php
-$link = mysqli_connect("localhost", "root", "mpkq88@2022", "online_quiz");
+$link = mysqli_connect("localhost", "root", "", "online_quiz");
 
 //mpkq88@2022
 // Check if the connection is successful

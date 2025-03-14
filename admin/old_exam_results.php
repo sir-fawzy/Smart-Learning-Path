@@ -61,6 +61,8 @@ include "../connection.php";
                             echo "<th>";
                             echo "exam time";
                             echo "</th>";
+                            echo "<th>Status</th>";
+                            echo "<th>Action</th>";
                             echo "</tr>";
 
                             while ($row = mysqli_fetch_array($res)) {
@@ -82,6 +84,19 @@ include "../connection.php";
                                 echo "</td>";
                                 echo "<td>";
                                 echo $row["exam_time"];
+                                echo "</td>";
+                                echo "<td>";
+                                if ($row["needs_grading"]) {
+                                    echo $row["graded"] ? "Graded" : "Needs Grading";
+                                } else {
+                                    echo "Auto-graded";
+                                }
+                                echo "</td>";
+                                echo "<td>";
+                                if ($row["needs_grading"] && !$row["graded"]) {
+                                    echo "<a href='grade_exam.php?id=" . $row["id"] . "' 
+                                          class='btn btn-primary btn-sm'>Grade</a>";
+                                }
                                 echo "</td>";
                                 echo "</tr>";
                             }

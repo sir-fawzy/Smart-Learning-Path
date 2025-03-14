@@ -17,6 +17,7 @@ if (!$link) {
 
         $correct = 0;
         $wrong = 0;
+        $needs_grading = false;
 
         if (isset($_SESSION["answer"])) {
             foreach ($_SESSION["answer"] as $i => $user_answer) {
@@ -24,12 +25,20 @@ if (!$link) {
                 $res = mysqli_query($link, "SELECT * from questions where category='$_SESSION[exam_category]' AND question_no=$i");
                 while ($row = mysqli_fetch_array($res)) {
                     $answer = $row["answer"];
-                }
-
-                if ($answer == $user_answer) {
-                    $correct++;
-                } else {
-                    $wrong++;
+                    if ($row["question_type"] == "text_answer") {
+                        // Text answers need manual grading
+                        $needs_grading = true;
+                        // Store the student's text answer for later review
+                        $student_answer = $user_answer;
+                        // Don't increment correct/wrong counters for text answers yet
+                    } else {
+                        // Multiple choice/true-false can still be auto-graded
+                        if ($answer == $user_answer) {
+                            $correct++;
+                        } else {
+                            $wrong++;
+                        }
+                    }
                 }
             }
         }
@@ -64,8 +73,23 @@ if (isset($_SESSION["exam_start"])) {
     $username = mysqli_real_escape_string($link, $_SESSION['username']);
     $exam_type = mysqli_real_escape_string($link, $_SESSION['exam_category']);
 
-    $query = "INSERT INTO exam_results(username, exam_type, total_question, correct_answer, wrong_answer, exam_time) 
-              VALUES ('$username', '$exam_type', $count, $correct, $wrong, '$date')";
+    $query = "INSERT INTO exam_results(
+        username, 
+        exam_type, 
+        total_question,
+        correct_answer,
+        wrong_answer,
+        exam_time,
+        needs_grading
+    ) VALUES (
+        '$username',
+        '$exam_type',
+        $count,
+        $correct,
+        $wrong,
+        '$date',
+        " . ($needs_grading ? 'TRUE' : 'FALSE') . "
+    )";
 
     if (!mysqli_query($link, $query)) {
         echo "Error: " . mysqli_error($link);

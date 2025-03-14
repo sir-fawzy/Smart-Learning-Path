@@ -1,13 +1,28 @@
-execute this command to drop the exam_results table:
-DROP TABLE exam_results;
+ALTER TABLE exam_category ADD COLUMN assessment_category ENUM('homework', 'quiz', 'exercise', 'test') DEFAULT 'quiz';
+ALTER TABLE exam_category ADD COLUMN due_date DATE NULL;
+ALTER TABLE exam_category ADD COLUMN time_limit INT NULL;
 
-Then execute this to create a new one:
-CREATE TABLE exam_results (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255),
-    exam_type VARCHAR(255),
-    total_question INT,
-    correct_answer INT,
-    wrong_answer INT,
-    exam_time DATETIME
+
+#questions table changes
+
+CREATE TABLE IF NOT EXISTS `questions` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `question_no` INT(11) NOT NULL, -- Order of questions within the category
+  `question_type` ENUM('multiple_choice', 'image_choice', 'true_false', 'text_answer') NOT NULL,
+  `question` TEXT NOT NULL, -- The question text
+  `opt1` VARCHAR(255) DEFAULT NULL, -- Option 1 (for multiple_choice and image_choice)
+  `opt2` VARCHAR(255) DEFAULT NULL, -- Option 2 (for multiple_choice and image_choice)
+  `opt3` VARCHAR(255) DEFAULT NULL, -- Option 3 (for multiple_choice)
+  `opt4` VARCHAR(255) DEFAULT NULL, -- Option 4 (for multiple_choice)
+  `answer` VARCHAR(255) DEFAULT NULL, -- Correct answer (for multiple_choice and true_false)
+  `fopt1` VARCHAR(255) DEFAULT NULL, -- Image file path for option 1 (for image_choice)
+  `fopt2` VARCHAR(255) DEFAULT NULL, -- Image file path for option 2 (for image_choice)
+  `fopt3` VARCHAR(255) DEFAULT NULL, -- Image file path for option 3 (for image_choice)
+  `fopt4` VARCHAR(255) DEFAULT NULL, -- Image file path for option 4 (for image_choice)
+  `fanswer` VARCHAR(255) DEFAULT NULL, -- Image file path for correct answer (for image_choice)
+  `correct_text` TEXT DEFAULT NULL, -- Correct answer text (for text_answer)
+  `category` VARCHAR(255) NOT NULL, -- The exam category this question belongs to
+  PRIMARY KEY (`id`),
+  KEY `category_idx` (`category`),
+  KEY `question_no_idx` (`question_no`)
 );
