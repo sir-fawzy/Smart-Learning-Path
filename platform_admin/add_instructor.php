@@ -32,6 +32,14 @@ ini_set('display_errors', 1);
                 <input type="text" class="form-control" id="last_name" name="last_name" required>
             </div>
             <div class="mb-3">
+                <label for="department" class="form-label">Department</label>
+                <input type="text" class="form-control" id="department" name="department" required>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="text" class="form-control" id="phone" name="phone" required>
+            </div>
+            <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email" required>
             </div>
@@ -47,13 +55,19 @@ ini_set('display_errors', 1);
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get the form data and sanitize
     $user_id = mysqli_real_escape_string($link, $_POST['user_id']);
     $first_name = mysqli_real_escape_string($link, $_POST['first_name']);
     $last_name = mysqli_real_escape_string($link, $_POST['last_name']);
     $email = mysqli_real_escape_string($link, $_POST['email']);
+    $department = mysqli_real_escape_string($link, $_POST['department']);
+    $phone = mysqli_real_escape_string($link, $_POST['phone']);
 
-    $query = "INSERT INTO instructors (user_id, first_name, last_name, email) VALUES ('$user_id', '$first_name', '$last_name', '$email')";
+    // Prepare the SQL query
+    $query = "INSERT INTO instructors (user_id, first_name, last_name, email, department, phone) 
+              VALUES ('$user_id', '$first_name', '$last_name', '$email', '$department', '$phone')";
 
+    // Execute the query and check if it's successful
     if (mysqli_query($link, $query)) {
         echo "<script>alert('Instructor added successfully!');</script>";
         echo "<script>window.location.href='index.php';</script>";

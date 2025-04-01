@@ -56,6 +56,7 @@ include "../connection.php";
                     <a href="index.php" class="active"><i class="fas fa-home me-2"></i> Dashboard</a>
                     <a href="add_instructor.php"><i class="fas fa-chalkboard-teacher me-2"></i> Add Instructor</a>
                     <a href="add_class.php"><i class="fas fa-school me-2"></i> Add Class</a>
+                    <a href="manage_instructors.php"><i class="fas fa-user-edit me-2"></i> Manage Instructors</a>
                     <a href="#"><i class="fas fa-users me-2"></i> Manage Users</a>
                     <a href="#"><i class="fas fa-chart-bar me-2"></i> Reports</a>
                     <a href="#"><i class="fas fa-cog me-2"></i> Settings</a>
